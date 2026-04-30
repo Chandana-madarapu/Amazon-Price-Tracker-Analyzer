@@ -1,4 +1,12 @@
-url,target
-https://www.amazon.in/dp/B0FQG1LPVF,150000
-https://www.amazon.in/dp/B0GR6LXD6L,75000
-https://www.amazon.in/dp/B0GPDV4GGT,2500
+Date,Product,Price
+2026-04-30 10:00,iPhone 17 Pro,154900
+2026-04-30 11:00,iPhone 17 Pro,153500
+2026-04-30 12:00,iPhone 17 Pro,152900
+
+2026-04-30 10:00,MacBook Neo,74999
+2026-04-30 11:00,MacBook Neo,73999
+2026-04-30 12:00,MacBook Neo,72999
+
+2026-04-30 10:00,boAt Watch,2999
+2026-04-30 11:00,boAt Watch,2799
+2026-04-30 12:00,boAt Watch,2599
