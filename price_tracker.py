@@ -9,8 +9,28 @@ import os
 from dotenv import load_dotenv
 import csv
 from datetime import datetime
+import pandas as pd
 
 load_dotenv()
+
+# ----------- LOAD PRODUCTS FROM CSV -----------
+def load_products():
+    try:
+        df = pd.read_csv("products.csv")
+        products = []
+
+        for _, row in df.iterrows():
+            products.append({
+                "url": row["url"],
+                "target": row["target"]
+            })
+
+        return products
+
+    except Exception as e:
+        print("❌ Error loading products:", e)
+        return []
+
 
 # ----------- GET PRODUCT DETAILS -----------
 def get_product_details(url):
@@ -27,7 +47,6 @@ def get_product_details(url):
 
     price = None
 
-    # Try multiple selectors (IMPORTANT FIX 🔥)
     selectors = [
         ("span", "a-offscreen"),
         ("span", "a-price-whole"),
@@ -94,26 +113,11 @@ def send_email(title, price, url):
         print("❌ Email failed:", e)
 
 
-# ----------- PRODUCTS LIST (YOUR PRODUCTS 🔥) -----------
-products = [
-    {
-        "url": "https://www.amazon.in/dp/B00HVBJ6W4",  # Fossil Watch
-        "target": 10000   # trigger email (demo)
-    },
-    {
-        "url": "https://www.amazon.in/dp/B0FWD8F8TN",  # MacBook
-        "target": 210000  # current ~202990 → will trigger
-    },
-    {
-        "url": "https://www.amazon.in/dp/B0FG2QDFD7",  # boAt Headphones
-        "target": 3000    # current ~2599 → will trigger
-    }
-]
-
-
 # ----------- MAIN FUNCTION -----------
 def check_price():
     print("\n🔍 Checking prices...\n")
+
+    products = load_products()
 
     for product in products:
         url = product["url"]
