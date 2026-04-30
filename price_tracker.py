@@ -16,7 +16,7 @@ load_dotenv()
 # ----------- LOAD PRODUCTS FROM CSV -----------
 def load_products():
     try:
-        df = pd.read_csv("price_data.csv")
+        df = pd.read_csv("products.csv")
         products = []
 
         for _, row in df.iterrows():
