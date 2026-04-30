@@ -6,7 +6,6 @@ st.set_page_config(page_title="Price Tracker Dashboard", layout="wide")
 
 st.title("📊 Amazon Price Tracker Dashboard")
 
-# Load data
 @st.cache_data
 def load_data():
     try:
@@ -21,7 +20,6 @@ df = load_data()
 if df.empty:
     st.warning("⚠️ No data available. Run price_tracker.py first.")
 else:
-    # Sidebar filter
     st.sidebar.header("🔍 Filters")
     products = df["Product"].unique()
     selected_product = st.sidebar.selectbox("Select Product", products)
@@ -30,14 +28,12 @@ else:
 
     st.subheader(f"📦 {selected_product}")
 
-    # Metrics
     col1, col2, col3 = st.columns(3)
 
     col1.metric("📉 Min Price", f"₹{filtered_df['Price'].min():,.0f}")
     col2.metric("📈 Max Price", f"₹{filtered_df['Price'].max():,.0f}")
     col3.metric("📊 Avg Price", f"₹{filtered_df['Price'].mean():,.0f}")
 
-    # Line chart
     st.subheader("📈 Price Trend")
 
     fig, ax = plt.subplots()
@@ -49,6 +45,5 @@ else:
 
     st.pyplot(fig)
 
-    # Raw data
     st.subheader("📄 Data Table")
     st.dataframe(filtered_df.sort_values("Date", ascending=False))
